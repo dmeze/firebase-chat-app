@@ -1,32 +1,39 @@
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
 import { logUserError } from "@/lib/analytics.js";
 
 import { db } from "../firebase";
 
-const useUserData = (userId) => {
-    const [userData, setUserData] = useState(null);
+const useFirestoreUsers = () => {
+    const [users, setUsers] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!userId) return;
+        const usersRef = collection(db, "users");
 
-        const fetchUserData = async () => {
-            try {
-                const docRef = doc(db, "users", userId);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    setUserData(docSnap.data());
-                }
-            } catch (err) {
-                logUserError({ type: "useUserData", userId, error: err.message });
+        const unsubscribe = onSnapshot(
+            usersRef,
+            (snapshot) => {
+                const usersData = {};
+                snapshot.forEach((doc) => {
+                    usersData[doc.id] = doc.data();
+                });
+                setUsers(usersData);
+                setLoading(false)
+            },
+            (err) => {
+                logUserError({ type: "useFirestoreUsers", error: err.message });
+                setError(err)
+                setLoading(false)
             }
-        };
+        );
 
-        fetchUserData();
-    }, [userId]);
+        return () => unsubscribe();
+    }, []);
 
-    return userData;
+    return { loading, users, error };
 };
 
-export default useUserData;
+export default useFirestoreUsers;

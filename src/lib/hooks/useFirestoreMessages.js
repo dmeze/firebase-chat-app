@@ -5,7 +5,7 @@ import { logUserError } from "@/lib/analytics.js";
 
 import { db } from "../firebase.js";
 
-export const useFirestoreMessages = (roomId) => {
+const useFirestoreMessages = (roomId) => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -36,3 +36,5 @@ export const useFirestoreMessages = (roomId) => {
 
     return { messages, loading, error };
 };
+
+export default useFirestoreMessages;

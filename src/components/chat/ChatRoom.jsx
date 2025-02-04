@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
-import { useFirestoreMessages } from "@/lib/hooks/useFirestoreMessages.js";
 import { logUserEvent } from "@/lib/analytics.js";
+import useFirestoreMessages from "@/lib/hooks/useFirestoreMessages.js";
+import useFirestoreUsers from "@/lib/hooks/useFirestoreUsers.js";
 
 import MessageList from "../messages/MessageList.jsx";
 import MessageInput from "../messages/MessageInput.jsx";
@@ -17,8 +18,9 @@ const ChatRoom = () => {
     }, [roomId]);
 
     const { messages, error, loading } = useFirestoreMessages(roomId);
+    const { users, error: usersError, loading: usersLoading } = useFirestoreUsers();
 
-    if (loading) {
+    if (loading || usersLoading) {
         return (
             <div className="flex items-center justify-center h-full">
                 <p>Loading messages...</p>
@@ -26,10 +28,10 @@ const ChatRoom = () => {
         );
     }
 
-    if (error) {
+    if (error || usersError) {
         return (
             <div className="flex items-center justify-center h-full">
-                <p>Error: {error.message}</p>
+                <p>Error: {error.message || usersError.message}</p>
             </div>
         );
     }
@@ -37,7 +39,7 @@ const ChatRoom = () => {
     return (
         <div className="flex flex-col h-full">
             <h2 className="text-2xl font-semibold mb-4">Chat Room: {roomId}</h2>
-            <MessageList messages={messages} />
+            <MessageList messages={messages} users={users} />
             <MessageInput />
         </div>
     );

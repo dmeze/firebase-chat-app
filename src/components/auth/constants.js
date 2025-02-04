@@ -39,5 +39,8 @@ export const signInFields = [
     },
 ]
 
+export const UPLOAD_ICON_LABEL = "Upload";
+export const DEFAULT_USER_NAME = 'Anonymous';
+export const ANONYMOUS_LABEL = 'Stay Anonymous'
 export const SIGN_IN_LABEL = "Sign In";
 export const SIGN_UP_LABEL = "Sign Up";
