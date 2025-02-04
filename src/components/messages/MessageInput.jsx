@@ -30,7 +30,7 @@ const MessageInput = () => {
 
     if (!user) {
         return (
-            <div className="flex justify-center items-center h-20 text-gray-600">
+            <div className="flex justify-center items-center my-2 text-gray-600">
                 Please log in to send messages.
             </div>
         );

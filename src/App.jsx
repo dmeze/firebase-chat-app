@@ -14,8 +14,8 @@ const UserField = lazy(() => import("./components/auth/UserField.jsx"));
 const App = () => (
     <AuthProvider>
         <Router>
-            <div className="flex h-screen">
-                <aside className="w-64 bg-gray-100 p-2 border-r border-gray-300 flex flex-col">
+            <div className="flex flex-col md:flex-row h-screen">
+                <aside className="w-full md:w-64 bg-gray-100 p-2 border-b md:border-b-0 md:border-r border-gray-300 flex flex-col">
                     <ChatRoomList />
                     <Suspense fallback={<div>Loading...</div>}>
                         <UserField />

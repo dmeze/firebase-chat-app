@@ -7,7 +7,7 @@ const rooms = [
 ];
 
 const ChatRoomList = () => (
-    <div>
+    <div className="mb-5">
         <h2 className="text-xl font-bold mb-4">Chat Rooms</h2>
         <ul className="space-y-2">
             {rooms.map((room) => (
