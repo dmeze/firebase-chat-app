@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home.jsx';
 import ChatRoomList from "./components/ChatRoomList.jsx";
+import ChatRoom from "./components/ChatRoom.jsx";
 
 const App = () => {
     return (
@@ -13,7 +14,7 @@ const App = () => {
                 <main className="flex-1 p-4">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/chat/:roomId" element={<>Chat Room</>} />
+                        <Route path="/chat/:roomId" element={<ChatRoom />} />
                     </Routes>
                 </main>
             </div>
