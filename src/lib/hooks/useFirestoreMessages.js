@@ -25,7 +25,7 @@ export const useFirestoreMessages = (roomId) => {
             },
             (err) => {
                 setError(err);
-                logUserError("useFirestoreMessages", { roomId, error: err.message });
+                logUserError({ type: 'useFirestoreMessages', roomId, error: err.message });
 
                 setLoading(false);
             }

@@ -19,7 +19,7 @@ const useUserData = (userId) => {
                     setUserData(docSnap.data());
                 }
             } catch (err) {
-                logUserError("useUserData", { userId, error: err.message });
+                logUserError({ type: "useUserData", userId, error: err.message });
             }
         };
 

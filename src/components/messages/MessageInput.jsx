@@ -23,7 +23,7 @@ const MessageInput = () => {
                 timestamp: serverTimestamp(),
             });
         } catch (error) {
-            logUserError("send_message", { message, roomId, error });
+            logUserError({ type: 'send_message', message, roomId, error });
         }
         setMessage("");
     };

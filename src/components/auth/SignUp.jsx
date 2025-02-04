@@ -25,7 +25,7 @@ const SignUp = () => {
             await setDoc(doc(db, "users", user.uid), { email: user.email, username, userIcon: "" });
             navigate(HOME_PATH);
         } catch (err) {
-            logUserError("sign_up", { email, error: err });
+            logUserError({ type: 'sign_up', email, error: err });
             setError(err.message);
         }
     };

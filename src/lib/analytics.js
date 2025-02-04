@@ -6,6 +6,6 @@ export const logUserEvent = (eventName, eventParams) => {
     logEvent(analytics, eventName, eventParams);
 }
 
-export const logUserError = (eventName, eventParams) => {
-    logEvent(analytics, `Error: ${eventName}`, eventParams);
+export const logUserError = (eventParams) => {
+    logEvent(analytics, 'error', eventParams);
 }

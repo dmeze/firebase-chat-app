@@ -23,7 +23,7 @@ const SignIn = () => {
             logEvent(analytics, "login", { method: "email", email: email });
             navigate(HOME_PATH);
         } catch (err) {
-            logUserError("sign_in", { email, error: err });
+            logUserError({ type: 'sign_in', email, error: err });
             setError(err.message);
         }
     };
