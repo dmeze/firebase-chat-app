@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { logEvent } from "firebase/analytics";
 
-import { auth, db } from "@/lib/firebase.js";
+import { analytics, auth, db } from "@/lib/firebase.js";
 import { HOME_PATH, SIGN_IN_PATH } from "@/lib/constants.js";
+import { logUserError } from "@/lib/analytics.js";
 
 import { SIGN_IN_LABEL, SIGN_UP_LABEL, signUpFields } from "./constants.js";
 
@@ -19,9 +21,11 @@ const SignUp = () => {
 
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
+            logEvent(analytics, "register", { method: "email", email: email });
             await setDoc(doc(db, "users", user.uid), { email: user.email, username, userIcon: "" });
             navigate(HOME_PATH);
         } catch (err) {
+            logUserError("sign_up", { email, error: err });
             setError(err.message);
         }
     };

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
+
+import { logUserError } from "@/lib/analytics.js";
+
 import { db } from "../firebase";
 
 const useUserData = (userId) => {
@@ -16,7 +19,7 @@ const useUserData = (userId) => {
                     setUserData(docSnap.data());
                 }
             } catch (err) {
-                console.error("Error fetching user data:", err);
+                logUserError("useUserData", { userId, error: err.message });
             }
         };
 

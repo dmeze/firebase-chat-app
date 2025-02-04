@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { auth, db, storage } from "@/lib/firebase.js";
 import { SIGN_IN_PATH, SIGN_UP_PATH } from "@/lib/constants.js";
+import { logUserEvent } from "@/lib/analytics.js";
 
 import { useAuthContext } from "./AuthContext.jsx";
 import { SIGN_IN_LABEL, SIGN_UP_LABEL } from "./constants.js";
@@ -28,6 +29,8 @@ const UserField = () => {
             await uploadBytes(iconRef, file);
             const downloadURL = await getDownloadURL(iconRef);
             await updateDoc(doc(db, "users", user.uid), { userIcon: downloadURL });
+
+            logUserEvent("profileImageUpload", { user: user.uid });
 
             setUser({ ...user, userIcon: downloadURL });
         } catch (err) {

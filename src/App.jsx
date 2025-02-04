@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home.jsx';
-import ChatRoomList from "./components/ChatRoomList.jsx";
-import ChatRoom from "./components/ChatRoom.jsx";
+import ChatRoomList from "./components/chat/ChatRoomList.jsx";
+import ChatRoom from "./components/chat/ChatRoom.jsx";
 import { AuthProvider } from "./components/auth/AuthContext.jsx";
 import UserField from "./components/auth/UserField.jsx";
 import SignUp from "./components/auth/SignUp.jsx";

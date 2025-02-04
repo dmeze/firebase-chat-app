@@ -1,11 +1,20 @@
+import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
-import MessageList from "./messages/MessageList.jsx";
-import MessageInput from "./messages/MessageInput.jsx";
-import { useFirestoreMessages } from "../lib/hooks/useFirestoreMessages.js";
+import { useFirestoreMessages } from "@/lib/hooks/useFirestoreMessages.js";
+import { logUserEvent } from "@/lib/analytics.js";
+
+import MessageList from "../messages/MessageList.jsx";
+import MessageInput from "../messages/MessageInput.jsx";
 
 const ChatRoom = () => {
     const { roomId } = useParams();
+
+    useEffect(() => {
+        logUserEvent("screen_view", {
+            screen_name: `ChatRoom: ${roomId}`,
+        });
+    }, [roomId]);
 
     const { messages, error, loading } = useFirestoreMessages(roomId);
 

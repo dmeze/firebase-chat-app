@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { logEvent } from "firebase/analytics";
 
-import { auth } from "@/lib/firebase.js";
+import { analytics, auth } from "@/lib/firebase.js";
 import { HOME_PATH, SIGN_UP_PATH } from "@/lib/constants.js";
+import { logUserError } from "@/lib/analytics.js";
 
 import { SIGN_IN_LABEL, SIGN_UP_LABEL, signInFields } from "./constants.js";
 
@@ -18,8 +20,10 @@ const SignIn = () => {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
+            logEvent(analytics, "login", { method: "email", email: email });
             navigate(HOME_PATH);
         } catch (err) {
+            logUserError("sign_in", { email, error: err });
             setError(err.message);
         }
     };

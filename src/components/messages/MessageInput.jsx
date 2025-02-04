@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 import { db } from "@/lib/firebase.js";
+import { logUserError } from "@/lib/analytics.js";
 
 import { useAuthContext } from "../auth/AuthContext.jsx";
 
@@ -22,7 +23,7 @@ const MessageInput = () => {
                 timestamp: serverTimestamp(),
             });
         } catch (error) {
-            console.error("Error sending message:", error);
+            logUserError("send_message", { message, roomId, error });
         }
         setMessage("");
     };

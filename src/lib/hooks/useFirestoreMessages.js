@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+
+import { logUserError } from "@/lib/analytics.js";
+
 import { db } from "../firebase.js";
 
 export const useFirestoreMessages = (roomId) => {
@@ -22,6 +25,8 @@ export const useFirestoreMessages = (roomId) => {
             },
             (err) => {
                 setError(err);
+                logUserError("useFirestoreMessages", { roomId, error: err.message });
+
                 setLoading(false);
             }
         );
