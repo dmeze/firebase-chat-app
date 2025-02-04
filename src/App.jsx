@@ -5,10 +5,10 @@ import ChatRoomList from "./components/chat/ChatRoomList.jsx";
 import { AuthProvider } from "./components/auth/AuthContext.jsx";
 import { CHAT_PATH, HOME_PATH, SIGN_IN_PATH, SIGN_UP_PATH } from "./lib/constants.js";
 
-const Home = lazy(() => import("./components/Home.jsx"));
-const ChatRoom = lazy(() => import("./components/chat/ChatRoom.jsx"));
-const SignIn = lazy(() => import("./components/auth/SignIn.jsx"));
-const SignUp = lazy(() => import("./components/auth/SignUp.jsx"));
+const Home = lazy(() => import("./pages/Home.jsx"));
+const ChatRoom = lazy(() => import("./pages/ChatRoom.jsx"));
+const SignIn = lazy(() => import("./pages/SignIn.jsx"));
+const SignUp = lazy(() => import("./pages/SignUp.jsx"));
 const UserField = lazy(() => import("./components/auth/UserField.jsx"));
 
 const App = () => (

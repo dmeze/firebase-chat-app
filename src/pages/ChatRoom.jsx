@@ -5,8 +5,8 @@ import { logUserEvent } from "@/lib/analytics.js";
 import useFirestoreMessages from "@/lib/hooks/useFirestoreMessages.js";
 import useFirestoreUsers from "@/lib/hooks/useFirestoreUsers.js";
 
-import MessageList from "../messages/MessageList.jsx";
-import MessageInput from "../messages/MessageInput.jsx";
+import MessageList from "../components/messages/MessageList.jsx";
+import MessageInput from "../components/messages/MessageInput.jsx";
 
 const ChatRoom = () => {
     const { roomId } = useParams();

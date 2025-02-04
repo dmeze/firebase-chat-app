@@ -7,7 +7,7 @@ import { analytics, auth } from "@/lib/firebase.js";
 import { HOME_PATH, SIGN_UP_PATH } from "@/lib/constants.js";
 import { logUserError } from "@/lib/analytics.js";
 
-import { SIGN_IN_LABEL, SIGN_UP_LABEL, signInFields } from "./constants.js";
+import { SIGN_IN_LABEL, SIGN_UP_LABEL, signInFields } from "../components/auth/constants.js";
 
 const SignIn = () => {
     const [error, setError] = useState(null);
