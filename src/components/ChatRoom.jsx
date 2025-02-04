@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import MessageList from "./MessageList.jsx";
 import MessageInput from "./MessageInput.jsx";
-import { useFirestoreMessages } from "../hooks/useFirestoreMessages.js";
+import { useFirestoreMessages } from "../lib/hooks/useFirestoreMessages.js";
 
 const ChatRoom = () => {
     const { roomId } = useParams();
@@ -29,7 +29,7 @@ const ChatRoom = () => {
         <div className="flex flex-col h-full">
             <h2 className="text-2xl font-semibold mb-4">Chat Room: {roomId}</h2>
             <MessageList messages={messages} />
-            <MessageInput user={{ username: 'Test' }} />
+            <MessageInput />
         </div>
     );
 };
