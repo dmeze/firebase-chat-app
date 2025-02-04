@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { db } from "../../../firebase.js";
+import { db } from "../firebase.js";
 
 export const useFirestoreMessages = (roomId) => {
     const [messages, setMessages] = useState([]);

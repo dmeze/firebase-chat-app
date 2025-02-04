@@ -41,4 +41,3 @@ export const signInFields = [
 
 export const SIGN_IN_LABEL = "Sign In";
 export const SIGN_UP_LABEL = "Sign Up";
-export const LOGOUT_LABEL = "Logout";

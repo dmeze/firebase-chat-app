@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 
-import MessageList from "./MessageList.jsx";
-import MessageInput from "./MessageInput.jsx";
+import MessageList from "./messages/MessageList.jsx";
+import MessageInput from "./messages/MessageInput.jsx";
 import { useFirestoreMessages } from "../lib/hooks/useFirestoreMessages.js";
 
 const ChatRoom = () => {

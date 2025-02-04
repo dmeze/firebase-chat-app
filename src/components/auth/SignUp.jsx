@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebase";
+
+import { auth, db } from "@/lib/firebase.js";
+import { HOME_PATH, SIGN_IN_PATH } from "@/lib/constants.js";
+
 import { SIGN_IN_LABEL, SIGN_UP_LABEL, signUpFields } from "./constants.js";
-import { HOME_PATH, SIGN_IN_PATH } from "../../lib/constants.js";
 
 const SignUp = () => {
     const [error, setError] = useState(null);

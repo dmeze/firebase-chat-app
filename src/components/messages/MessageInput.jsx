@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-import { db } from "../../firebase";
-import { useAuthContext } from "./auth/AuthContext.jsx";
+import { db } from "@/lib/firebase.js";
+
+import { useAuthContext } from "../auth/AuthContext.jsx";
 
 const MessageInput = () => {
     const { roomId } = useParams();
@@ -17,8 +18,7 @@ const MessageInput = () => {
         try {
             await addDoc(collection(db, "chatRooms", roomId, "messages"), {
                 text: message,
-                username: user.username,
-                profilePicture: user.profilePicture || "",
+                userId: user.uid,
                 timestamp: serverTimestamp(),
             });
         } catch (error) {
