@@ -1,14 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
 
 const App = () => {
     return (
         <Router>
-            <div className="container mx-auto p-4">
-                <h1 className="text-3xl font-bold mb-4 text-center text-red-400">Firebase Chat App</h1>
-                <Routes>
-                    <Route path="/" element={<>home</>} />
-                    <Route path="/chat/:roomId" element={<>chat room</>} />
-                </Routes>
+            <div className="flex h-screen">
+                <aside className="w-64 bg-gray-100 p-4 border-r border-gray-300">
+                    Chat List Drawer
+                </aside>
+                <main className="flex-1 p-4">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/chat/:roomId" element={<>Chat Room</>} />
+                    </Routes>
+                </main>
             </div>
         </Router>
     );
