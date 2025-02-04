@@ -1,22 +1,28 @@
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-const MessageInput = ({ user, setMessages }) => {
+import { db } from "../../firebase";
+
+const MessageInput = ({ user }) => {
+    const { roomId } = useParams();
     const [message, setMessage] = useState('');
 
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!message.trim()) return;
 
-        setMessages((messages) => [
-            ...messages,
-            {
-                id: messages.length + 1,
-                username: user.username,
+        try {
+            await addDoc(collection(db, "chatRooms", roomId, "messages"), {
                 text: message,
-            },
-        ]);
-
-        setMessage('');
+                username: user.username,
+                profilePicture: user.profilePicture || "",
+                timestamp: serverTimestamp(),
+            });
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+        setMessage("");
     };
 
     return (
