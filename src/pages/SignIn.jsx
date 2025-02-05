@@ -51,6 +51,7 @@ const SignIn = () => {
                 ))}
                 <button
                     type="submit"
+                    data-testid="signin-button"
                     className="w-full py-2 text-white bg-blue-500 hover:bg-blue-600 transition"
                 >
                     {SIGN_IN_LABEL}

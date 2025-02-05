@@ -5,6 +5,26 @@ import path from 'path';
 
 export default defineConfig({
     plugins: [react(), tailwindcss()],
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: './src/setupTests.js',
+        testMatch: 'src/**/*.test.jsx',
+        coverage: {
+            exclude: ['src/**/*.test.jsx'],
+            include: ['src/**/*.jsx', 'src/**/*.js'],
+            thresholds: {
+                global: {
+                    statements: 90,
+                    branches: 90,
+                    functions: 90,
+                    lines: 90,
+                },
+            },
+            extensions: ['.js', '.jsx'],
+            reporter: ['text']
+        }
+    },
     build: {
         rollupOptions: {
             output: {

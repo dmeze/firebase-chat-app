@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { logUserEvent } from "@/lib/analytics.js";
 import useFirestoreMessages from "@/lib/hooks/useFirestoreMessages.js";
 import useFirestoreUsers from "@/lib/hooks/useFirestoreUsers.js";
+import { CHAT_ROOM_TITLE, MESSAGES_LOADING_TEXT, NO_MESSAGES_TEXT } from "@/pages/constants.js";
 
 import MessageList from "../components/messages/MessageList.jsx";
 import MessageInput from "../components/messages/MessageInput.jsx";
@@ -13,7 +14,7 @@ const ChatRoom = () => {
 
     useEffect(() => {
         logUserEvent("screen_view", {
-            screen_name: `ChatRoom: ${roomId}`,
+            screen_name: `${CHAT_ROOM_TITLE} ${roomId}`,
         });
     }, [roomId]);
 
@@ -23,7 +24,7 @@ const ChatRoom = () => {
     if (loading || usersLoading) {
         return (
             <div className="flex items-center justify-center h-full">
-                <p>Loading messages...</p>
+                <p>{MESSAGES_LOADING_TEXT}</p>
             </div>
         );
     }
@@ -31,15 +32,18 @@ const ChatRoom = () => {
     if (error || usersError) {
         return (
             <div className="flex items-center justify-center h-full">
-                <p>Error: {error.message || usersError.message}</p>
+                <p>Error: {error?.message || usersError?.message}</p>
             </div>
         );
     }
 
     return (
         <div className="flex flex-col h-full">
-            <h2 className="text-2xl font-semibold mb-4">Chat Room: {roomId}</h2>
-            <MessageList messages={messages} users={users} />
+            <h2 className="text-2xl font-semibold mb-4">{`${CHAT_ROOM_TITLE} ${roomId}`}</h2>
+            {messages.length
+                ? <MessageList messages={messages} users={users} />
+                : <p>{NO_MESSAGES_TEXT}</p>
+            }
             <MessageInput />
         </div>
     );

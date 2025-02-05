@@ -27,7 +27,7 @@ const UserField = () => {
                     <ProfileIconUpload user={user} setUser={setUser} />
                     <div className="flex items-center space-x-5">
                         <p className="text-sm">Welcome, {user.username || DEFAULT_USER_NAME}</p>
-                        <button onClick={handleSignOut} className="cursor-pointer">
+                        <button data-testid="logout-btn" onClick={handleSignOut} className="cursor-pointer">
                             <LogoutIcon />
                         </button>
                     </div>

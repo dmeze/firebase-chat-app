@@ -51,7 +51,11 @@ const SignUp = () => {
                         />
                     </div>
                 ))}
-                <button type="submit" className="w-full py-2 bg-gray-200 hover:bg-gray-300 rounded transition">
+                <button
+                    data-testid="signup-button"
+                    type="submit"
+                    className="w-full py-2 bg-gray-200 hover:bg-gray-300 rounded transition"
+                >
                     {SIGN_UP_LABEL}
                 </button>
             </form>

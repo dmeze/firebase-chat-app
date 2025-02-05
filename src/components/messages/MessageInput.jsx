@@ -6,6 +6,7 @@ import { db } from "@/lib/firebase.js";
 import { logUserError } from "@/lib/analytics.js";
 
 import { useAuthContext } from "../auth/AuthContext.jsx";
+import { NO_USER, SEND_BUTTON_TEXT, TYPE_MESSAGE_PLACEHOLDER } from "@/components/messages/constants.js";
 
 const MessageInput = () => {
     const { roomId } = useParams();
@@ -31,7 +32,7 @@ const MessageInput = () => {
     if (!user) {
         return (
             <div className="flex justify-center items-center my-2 text-gray-600">
-                Please log in to send messages.
+                {NO_USER}
             </div>
         );
     }
@@ -42,14 +43,14 @@ const MessageInput = () => {
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message..."
+                placeholder={TYPE_MESSAGE_PLACEHOLDER}
                 className="flex-grow p-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <button
                 type="submit"
                 className="px-4 py-2 cursor-pointer bg-blue-600 text-white rounded-r hover:bg-blue-700 focus:outline-none"
             >
-                Send
+                {SEND_BUTTON_TEXT}
             </button>
         </form>
     );
