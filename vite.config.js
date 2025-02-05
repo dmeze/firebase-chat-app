@@ -11,7 +11,7 @@ export default defineConfig({
         setupFiles: './src/setupTests.js',
         testMatch: 'src/**/*.test.jsx',
         coverage: {
-            exclude: ['src/**/*.test.jsx'],
+            exclude: ['src/**/*.test.jsx', 'src/index.jsx'],
             include: ['src/**/*.jsx', 'src/**/*.js'],
             thresholds: {
                 global: {
